@@ -1,3 +1,65 @@
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 from django.shortcuts import render
 
-# Create your views here.
+from .models import (
+    Organization,
+    UploadBatch,
+    RawEmissionRecord,
+)
+
+import pandas as pd
+
+
+@api_view(["POST"])
+def upload_csv(request):
+
+    csv_file = request.FILES.get("file")
+
+    if not csv_file:
+        return Response({
+            "error": "No file uploaded"
+        }, status=400)
+
+    df = pd.read_csv(csv_file)
+
+    organization = Organization.objects.first()
+
+    batch = UploadBatch.objects.create(
+        organization=organization,
+        source_type="SAP",
+        original_filename=csv_file.name,
+        status="COMPLETED"
+    )
+
+    for _, row in df.iterrows():
+
+        status = "PENDING"
+
+        if row["value"] < 0:
+            status = "FLAGGED"
+
+        if row["value"] > 10000:
+            status = "FLAGGED"
+
+        if not row["unit"]:
+            status = "FLAGGED"
+
+        RawEmissionRecord.objects.create(
+            organization=organization,
+            upload_batch=batch,
+            activity_type=row["activity_type"],
+            source_value=row["value"],
+            source_unit=row["unit"],
+            normalized_value=row["value"] * 2.5,
+            activity_date=row["date"],
+            status=status,
+        )
+
+    return Response({
+        "message": "CSV uploaded successfully"
+    })
+
+
+def upload_page(request):
+    return render(request, "upload.html")
