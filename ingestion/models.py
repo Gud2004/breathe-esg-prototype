@@ -79,6 +79,10 @@ class RawEmissionRecord(models.Model):
         choices=STATUS_CHOICES,
         default="PENDING"
     )
+    scope_category = models.CharField(
+    max_length=20,
+    default="Scope 1"
+    )
 
     created_at = models.DateTimeField(auto_now_add=True)
 

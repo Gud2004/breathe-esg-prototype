@@ -45,6 +45,14 @@ def upload_csv(request):
         if not row["unit"]:
             status = "FLAGGED"
 
+        scope = "Scope 1"
+
+        if "Electricity" in row["activity_type"]:
+            scope = "Scope 2"
+
+        if "Flight" in row["activity_type"]:
+            scope = "Scope 3"
+
         RawEmissionRecord.objects.create(
             organization=organization,
             upload_batch=batch,
@@ -54,6 +62,7 @@ def upload_csv(request):
             normalized_value=row["value"] * 2.5,
             activity_date=row["date"],
             status=status,
+            scope_category=scope,
         )
 
     return Response({

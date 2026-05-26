@@ -1,5 +1,5 @@
 activity_type,value,unit,date
-Diesel Fuel,500,liters,2026-01-10
-Petrol Fuel,-200,liters,2026-01-11
-Natural Gas,12000,m3,2026-01-12
-Coal Fuel,100,,2026-01-13
+Coal Fuel,100,kg,2026-05-01
+Electricity,5000,kWh,2026-05-05
+Flight Travel,1200,km,2026-05-07
+Diesel Fuel,500,L,2026-05-10
