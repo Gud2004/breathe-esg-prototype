@@ -1,0 +1,3 @@
+employee_id,trip_type,from_airport,to_airport,distance_km,class
+EMP-22,Flight,DEL,BOM,1140,Economy
+EMP-91,Flight,BLR,SIN,3180,Business

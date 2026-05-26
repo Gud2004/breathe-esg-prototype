@@ -1,0 +1,3 @@
+meter_id,site_name,kwh,billing_start,billing_end,tariff
+MTR-8821,Bangalore HQ,12000,2026-04-01,2026-04-30,Industrial
+MTR-9922,Mumbai Office,8000,2026-04-01,2026-04-30,Commercial

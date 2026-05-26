@@ -1,0 +1,4 @@
+plant_code,fuel_type,quantity,unit,posting_date,currency
+DE_PLANT_1001,Diesel,500,L,2026-05-01,EUR
+IN_REFINERY_22,Petrol,1200,L,2026-05-03,INR
+US_SITE_88,Natural Gas,300,m3,2026-05-05,USD
