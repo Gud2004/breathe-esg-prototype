@@ -23,7 +23,9 @@ def upload_csv(request):
 
     df = pd.read_csv(csv_file)
 
-    organization = Organization.objects.first()
+    organization, created = Organization.objects.get_or_create(
+    name="Demo Organization"
+)
 
     batch = UploadBatch.objects.create(
         organization=organization,
